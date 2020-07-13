@@ -1,0 +1,20 @@
+For the Multi-AZ, multi-region database scenario:
+1. Minimum RTO for a single AZ outage  - 1-2 minutes
+The Recovery time Objective when a single AZ fails in Multi-AZ configuration is supposed to be minimal, i.e. and tending towards Zero. The redundant AZ is always a standby copy, and designed to switch over seamlessly if the primary AZ fails.
+
+
+2. Minimum RTO for a single region outage
+When a whole region fails, the service can be expected to be interrupted for a estimate of 10 minutes.
+
+00:00 - Primary Region Fails(0 Minutes)
+00:05 - Amount of time that passes before an alert is triggered(4 minutes)
+00:06 - Alert is triggered indicating region failure (1 minute)
+00:07 - On-call Staff logging into the secondary region(2 minute)
+00:08 - Promoting read replica, and modifying instance for write access (2 minutes)
+00:10 - Remediation Completed
+
+Minimum RPO for a single AZ outage. RPO - 0 minutes
+When a single AZ fails. Logs are kept intact, no data loss is expected during an instant automatic failover to the standby instance.
+
+Minimum RPO for a single region outage. - 5 minutes
+RPO for recovery with an RDS Single- region outage would be estimated at about 5 minutes (the interval required for copying transaction logs to Amazon S3), but it can vary. 
